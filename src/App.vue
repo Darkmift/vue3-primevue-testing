@@ -1,6 +1,12 @@
 <template>
-	<app-nav />
-	<router-view />
+	<div class="#app p-grid">
+		<div class="p-col-12">
+			<app-nav />
+		</div>
+		<div class="p-col-12">
+			<router-view />
+		</div>
+	</div>
 </template>
 
 <style lang="scss">
