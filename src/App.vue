@@ -1,30 +1,43 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+	<app-nav />
+	<router-view />
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
 }
 </style>
+
+<script>
+import { useStore } from "vuex";
+import { onMounted } from "vue";
+
+import AppNav from "./components/AppNav.vue";
+
+export default {
+	name: "App",
+	components: { AppNav },
+	watch: {
+		$route: {
+			immediate: true,
+			handler(to) {
+				document.title = to.name || "App";
+			},
+		},
+	},
+	setup() {
+		const store = useStore();
+		onMounted(() => {
+			store.dispatch({
+				type: "logUser",
+				user: { fname: "Jhon", lname: "smith", role: 1, id: "43g5e" },
+			});
+		});
+	},
+};
+</script>
